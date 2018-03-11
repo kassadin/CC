@@ -31,7 +31,32 @@ ext {
     minVersion = 8
 
     supportVersion = '25.3.1'
+
+    m = [:] // true app | false lib
 }
+
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+readModuleConfig()
+
+def readModuleConfig() {
+    Properties localProperties = new Properties()
+    try {
+        def localFile = rootProject.file('local.properties')
+        if (localFile != null && localFile.exists()) {
+            localProperties.load(localFile.newDataInputStream())
+        }
+    } catch (Exception ignored) {
+    }
+    rootProject.subprojects.each {
+        m[it.name] = Boolean.parseBoolean(localProperties.getProperty(it.name))
+    }
+
+    m.each{
+        println "module ${it.key} is ${it.value ? "APP" : "LIB"}"
+    }
+
+    println "readModuleConfig finish"
 }
