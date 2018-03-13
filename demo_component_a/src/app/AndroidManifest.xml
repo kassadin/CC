@@ -1,13 +1,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.billy.cc.demo.component.a" >
+    <permission android:name="cc.permission.com.billy.cc.demo.REMOTE_CC" android:protectionLevel="signature" />
+    <uses-permission android:name="cc.permission.com.billy.cc.demo.REMOTE_CC" />
 
     <application
-        android:name="debug.MyApp"
+        android:name="MyApp"
         android:allowBackup="false"
         android:icon="@mipmap/demo_a_ic_launcher"
         android:label="@string/demo_a_app_name"
         android:supportsRtl="true"
         android:theme="@style/demo_a_AppTheme">
+        <receiver android:name="com.billy.cc.core.component.ComponentBroadcastReceiver"
+                  android:permission="cc.permission.com.billy.cc.demo.REMOTE_CC"
+            />
         <activity android:name="com.billy.cc.demo.component.a.ActivityA">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

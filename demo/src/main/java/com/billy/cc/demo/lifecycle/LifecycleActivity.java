@@ -77,7 +77,7 @@ public class LifecycleActivity extends AppCompatActivity implements View.OnClick
             case R.id.call_fragment_method:
                 //send message to current fragment
                 CC.obtainBuilder("demo.ComponentA")
-                        .setActionName("lifecycleFragment.addText")
+                        .setActionName("lifecycleFragmentAddText")
                         .addParam("fragment", fragment)
                         .addParam("text", "text from LifecycleActivity")
                         .build()
